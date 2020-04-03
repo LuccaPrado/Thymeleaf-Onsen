@@ -17,8 +17,8 @@ public class TodoItemService {
 
     private final TodoItemRepository repository;
 
-    public Long createTodoItem(TodoItem todoItem){
-        return repository.save(todoItem).getId();
+    public void createTodoItem(TodoItem todoItem){
+         repository.save(todoItem);
     }
 
     public void deleteTodoItem(Long todoId){

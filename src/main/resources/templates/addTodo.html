@@ -7,9 +7,13 @@
     </ons-toolbar>
     <div class="content">
         <div style="text-align: center" class="my-center">
-            <form action="#" th:action="@{/}" th:object="${todoItemRequest}" method="post">
-                <ons-input placeholder="Description" float></ons-input>
-                <ons-input type="number" placeholder="Duration" min="0" max="500" float></ons-input>
+            <form action="" th:action="@{/todo}"  method="post">
+
+                <ons-input style="margin-top: 5%" th:object="${name}"   placeholder="Name" float></ons-input>
+
+                <ons-input style="margin-top: 5%" th:object="${description}"  placeholder="Description" float></ons-input>
+
+                <input type="submit" value="Submit"/>
             </form>
         </div>
     </div>

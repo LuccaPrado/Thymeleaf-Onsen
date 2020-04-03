@@ -30,7 +30,8 @@ public class TodoItem  {
 
     private Double duration;
 
-    private Boolean complete;
+    @Builder.Default
+    private Boolean complete = false;
 
     @Setter
     @Builder.Default
