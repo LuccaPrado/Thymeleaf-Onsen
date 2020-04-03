@@ -1,0 +1,13 @@
+<ons-page xmlns:th="http://www.thymeleaf.org">
+    <ons-toolbar>
+        <div class="left">
+            <ons-back-button>Back</ons-back-button>
+        </div>
+        <div class="center" th:text="${todoItemResponse.name}"></div>
+    </ons-toolbar>
+    <div class="content">
+        <div style="text-align: center" class="my-center">
+        <p th:text="${todoItemResponse.description}"></p>
+        </div>
+    </div>
+</ons-page>

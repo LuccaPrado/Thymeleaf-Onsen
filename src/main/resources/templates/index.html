@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo Item</title>
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+    <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+</head>
+<body>
+<ons-navigator id="navigator">
+    <ons-page id="home">
+        <ons-toolbar>
+            <div class="center">TODOs</div>
+            <div class="right">
+                <ons-toolbar-button id="add-new">
+                    <ons-icon icon="fa-plus-square"></ons-icon>
+                </ons-toolbar-button>
+            </div>
+        </ons-toolbar>
+
+        <ons-list>
+            <ons-list-header>My todos</ons-list-header>
+            <ons-list-item id="todo-item" th:each="todoItem : ${todoItems}" th:inline="text"
+                           th:onclick="'javascript:fn.pushPage(' + ${todoItem.id} + ')'" tappable>
+                <label class="right">
+                    <ons-checkbox input-id="check-1" th:checked="${todoItem.complete}"></ons-checkbox>
+                </label>
+                <label class="center">
+                    <p th:text="${todoItem.name}"></p>
+                </label>
+            </ons-list-item>
+        </ons-list>
+        <script>
+            history.pushState(null, document.title, location.href);
+            window.addEventListener('popstate', function (event) {
+                document.querySelector('#navigator').popPage();
+                history.pushState(null, document.title, location.href);
+            });
+            window.fn = {};
+            document.addEventListener('init', function (event) {
+                console.log('This is a lifecycle event!', event.target);
+                var page = event.target;
+
+                if (page.matches('#home')) {
+                    page.querySelector('ons-toolbar .center').innerHTML = 'My app';
+                    page.querySelector('#add-new').onclick = function () {
+                        document.querySelector('#navigator').pushPage('todo');
+                    };
+                }
+
+                window.fn.pushPage = function (id) {
+                    document.getElementById('navigator').pushPage('todo/' + id);
+                };
+
+            });
+        </script>
+    </ons-page>
+</ons-navigator>
+</body>
+</html>

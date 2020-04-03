@@ -1,0 +1,16 @@
+<ons-page xmlns:th="http://www.thymeleaf.org">
+    <ons-toolbar>
+        <div class="left">
+            <ons-back-button>Back</ons-back-button>
+        </div>
+        <div class="center">Add Your todo</div>
+    </ons-toolbar>
+    <div class="content">
+        <div style="text-align: center" class="my-center">
+            <form action="#" th:action="@{/}" th:object="${todoItemRequest}" method="post">
+                <ons-input placeholder="Description" float></ons-input>
+                <ons-input type="number" placeholder="Duration" min="0" max="500" float></ons-input>
+            </form>
+        </div>
+    </div>
+</ons-page>

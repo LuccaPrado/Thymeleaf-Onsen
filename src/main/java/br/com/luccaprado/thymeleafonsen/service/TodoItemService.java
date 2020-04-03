@@ -9,6 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class TodoItemService {
@@ -25,8 +27,12 @@ public class TodoItemService {
         repository.save(todoItem);
     }
 
-    public Slice<TodoItem> listTodoItems(){
+    public List<TodoItem> listTodoItems(){
         return repository.findAll();
     }
 
+    public TodoItem findById(Long id) {
+        TodoItem todoItem = repository.findById(id).orElseThrow(TodoNotFoundException::new);
+        return todoItem;
+    }
 }

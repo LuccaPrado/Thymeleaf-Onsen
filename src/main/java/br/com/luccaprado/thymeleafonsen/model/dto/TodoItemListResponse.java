@@ -9,15 +9,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class TodoItemResponse {
+public class TodoItemListResponse {
 
     private Long id;
 
     private String name;
-
-    private String description;
-
-    private Double duration;
 
     private Boolean complete;
 
