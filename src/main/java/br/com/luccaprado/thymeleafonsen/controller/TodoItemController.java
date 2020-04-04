@@ -9,6 +9,8 @@ import br.com.luccaprado.thymeleafonsen.model.mapper.TodoItemMapper;
 import br.com.luccaprado.thymeleafonsen.service.TodoItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,11 +38,11 @@ public class TodoItemController {
     }
 
     @PostMapping("/todo")
-    public ModelAndView addTodo(@ModelAttribute TodoItemRequest todoItemRequest){
+    public ModelAndView addTodo(@Validated @ModelAttribute("todoItemRequest") TodoItemRequest todoItemRequest, Model model){
         todoItemService.createTodoItem(todoItemMapper.requestToEntity(todoItemRequest));
         List<TodoItemListResponse> todoItems = todoItemService.listTodoItems().stream().map(todoItemMapper::entityListToResponse).collect(Collectors.toList());
-        ModelAndView mv = new ModelAndView("index.html");
-        mv.addObject("todoItems", todoItems);
+        ModelAndView mv = new ModelAndView("redirect:/");
+
         return mv;
     }
 
